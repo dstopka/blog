@@ -13,11 +13,11 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 	t.Parallel()
 	customPageSize := 15
 
-	testCases := map[string]struct{
-		query QueryPostsPage
+	testCases := map[string]struct {
+		query         QueryPostsPage
 		configureMock func(t *testing.T, m *MockPostService, q QueryPostsPage)
 
-		shouldFail bool
+		shouldFail    bool
 		expectedError string
 	}{
 		"returns first page when cursor is empty": {
@@ -39,7 +39,7 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 			configureMock: func(_ *testing.T, m *MockPostService, q QueryPostsPage) {
 				m.On("FirstPostsPage", mock.Anything, q.PageSize).Return(nil, errors.New("FirstPostsPage failed"))
 			},
-			shouldFail: true,
+			shouldFail:    true,
 			expectedError: "FirstPostsPage failed",
 		},
 		"PostsPageFromCursor failed": {
@@ -47,7 +47,7 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 			configureMock: func(_ *testing.T, m *MockPostService, q QueryPostsPage) {
 				m.On("PostsPageFromCursor", mock.Anything, q.Cursor, q.PageSize).Return(nil, errors.New("PostsPageFromCursor failed"))
 			},
-			shouldFail: true,
+			shouldFail:    true,
 			expectedError: "PostsPageFromCursor failed",
 		},
 	}
@@ -77,7 +77,7 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 func TestQueryPostsPage_setMissingArguments(t *testing.T) {
 	t.Parallel()
 
-	t.Run("sets defaults", func (t *testing.T) {
+	t.Run("sets defaults", func(t *testing.T) {
 		t.Parallel()
 
 		query := QueryPostsPage{}
@@ -93,7 +93,7 @@ func TestQueryPostsPage_setMissingArguments(t *testing.T) {
 
 		query := QueryPostsPage{PageSize: customPageSize}
 		expected := QueryPostsPage{PageSize: customPageSize}
-		
+
 		query.setMissingArguments()
 		assert.Equal(t, expected, query)
 	})
