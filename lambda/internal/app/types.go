@@ -8,10 +8,10 @@ type Post struct {
 	Description   string
 	Slug          string
 	Content       string
-	Tags          []string
 	CoverImageURL string
+	Tags          []string
 	PublishedTime time.Time
-	EditedTime    time.Time
+	UpdatedTime   *time.Time
 }
 
 // PostsPage represents a page which contains posts.
