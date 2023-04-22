@@ -1,0 +1,103 @@
+{{- /*gotype: github.com/dstopka/blog/lambda/internal/notion2md.TemplateData*/ -}}
+{{- range .Blocks -}}
+{{template "execBlock" .}}{{"\n"}}
+{{- end -}}
+
+{{- define "execBlock" -}}
+    {{- if eq .Type "bulletedList" -}}
+        {{- template "bulletedListItem" . -}}
+    {{- else if eq .Type "code" -}}
+        {{- template "code" . -}}
+    {{- else if eq .Type "divider" -}}
+        {{- template "divider" . -}}
+    {{- else if eq .Type "heading" -}}
+        {{- template "heading" . -}}
+    {{- else if eq .Type "image" -}}
+        {{- template "image" . -}}
+    {{- else if eq .Type "numberedList" -}}
+        {{- template "numberedListItem" . -}}
+    {{- else if eq .Type "todo" -}}
+        {{- template "todo" . -}}
+    {{- else if eq .Type "toggle" -}}
+        {{- template "toggle" . -}}
+    {{- else if eq .Type "paragraph" -}}
+        {{- template "paragraph" . -}}
+    {{- else if eq .Type "quote" -}}
+        {{- template "quote" . -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "bulletedListItem" -}}
+- {{.Text}}
+    {{- range .Children -}}
+        {{"\n"}}{{"  "}}{{- template "execBlock" . -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "caption" -}}
+<figcaption>
+
+{{.}}
+
+</figcaption>
+{{- end -}}
+
+{{- define "code" -}}
+```{{.Language}}
+{{noescape .Code}}
+```
+    {{- if .Caption -}}
+        {{"\n"}}{{- template "caption" .Caption -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "divider" -}}
+---
+{{- end -}}
+
+{{- define "heading" -}}
+{{range $i := loop .Level}}#{{end}} {{.Text}}{{"\n"}}
+{{- end -}}
+
+{{- define "image" -}}
+![]({{noescape .URL}})
+    {{- if .Caption -}}
+        {{"\n"}}{{- template "caption" .Caption -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "todo" -}}
+- {{if .Checked}}[x]{{else}}[ ]{{end}} {{.Text}}
+    {{- range .Children -}}
+        {{"\n"}}{{"  "}}{{- template "execBlock" . -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "toggle" -}}
+<details>
+<summary>{{.Text}}</summary>{{"\n"}}
+    {{- if .Children -}}
+        {{- range .Children -}}
+            {{"\n"}}{{- template "execBlock" . -}}
+        {{- end -}}
+        {{"\n\n"}}
+    {{- end -}}
+</details>
+{{- end -}}
+
+{{- define "numberedListItem" -}}
+1. {{.Text}}
+    {{- range .Children -}}
+        {{"\n"}}{{"    "}}{{- template "execBlock" . -}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "paragraph" -}}
+    {{- if .Text -}}
+        {{"\n"}}{{.Text}}
+    {{- end -}}
+{{- end -}}
+
+{{- define "quote" -}}
+> {{.Text}}
+{{- end -}}
