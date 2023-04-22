@@ -6,7 +6,7 @@ import (
 
 // PostsService defines functions needed to perform post related operations.
 //
-//go:generate go run github.com/vektra/mockery/v2 --name PostService --inpackage=true
+//go:generate go run github.com/vektra/mockery/v2 --name PostService
 type PostService interface {
 	// FindPostBySlug finds and returns post identified by the given slug.
 	FindPostBySlug(ctx context.Context, slug string) (*Post, error)
