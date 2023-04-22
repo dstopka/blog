@@ -1,10 +1,12 @@
-package app
+package app_test
 
 import (
 	"context"
 	"errors"
 	"testing"
 
+	"github.com/dstopka/blog/lambda/internal/app"
+	"github.com/dstopka/blog/lambda/internal/app/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
@@ -14,37 +16,37 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 	customPageSize := 15
 
 	testCases := map[string]struct {
-		query         QueryPostsPage
-		configureMock func(t *testing.T, m *MockPostService, q QueryPostsPage)
+		query         app.QueryPostsPage
+		configureMock func(t *testing.T, m *mocks.PostService, q app.QueryPostsPage)
 
 		shouldFail    bool
 		expectedError string
 	}{
 		"returns first page when cursor is empty": {
-			query: QueryPostsPage{PageSize: customPageSize},
-			configureMock: func(_ *testing.T, m *MockPostService, q QueryPostsPage) {
-				m.On("FirstPostsPage", mock.Anything, q.PageSize).Return(&PostsPage{}, nil)
+			query: app.QueryPostsPage{PageSize: customPageSize},
+			configureMock: func(_ *testing.T, m *mocks.PostService, q app.QueryPostsPage) {
+				m.On("FirstPostsPage", mock.Anything, q.PageSize).Return(&app.PostsPage{}, nil)
 			},
 			shouldFail: false,
 		},
 		"uses cursor when provided": {
-			query: QueryPostsPage{PageSize: customPageSize, Cursor: "test-cursor"},
-			configureMock: func(_ *testing.T, m *MockPostService, q QueryPostsPage) {
-				m.On("PostsPageFromCursor", mock.Anything, q.Cursor, q.PageSize).Return(&PostsPage{}, nil)
+			query: app.QueryPostsPage{PageSize: customPageSize, Cursor: "test-cursor"},
+			configureMock: func(_ *testing.T, m *mocks.PostService, q app.QueryPostsPage) {
+				m.On("PostsPageFromCursor", mock.Anything, q.Cursor, q.PageSize).Return(&app.PostsPage{}, nil)
 			},
 			shouldFail: false,
 		},
 		"FirstPostsPage failed": {
-			query: QueryPostsPage{PageSize: customPageSize},
-			configureMock: func(_ *testing.T, m *MockPostService, q QueryPostsPage) {
+			query: app.QueryPostsPage{PageSize: customPageSize},
+			configureMock: func(_ *testing.T, m *mocks.PostService, q app.QueryPostsPage) {
 				m.On("FirstPostsPage", mock.Anything, q.PageSize).Return(nil, errors.New("FirstPostsPage failed"))
 			},
 			shouldFail:    true,
 			expectedError: "FirstPostsPage failed",
 		},
 		"PostsPageFromCursor failed": {
-			query: QueryPostsPage{PageSize: customPageSize, Cursor: "test-cursor"},
-			configureMock: func(_ *testing.T, m *MockPostService, q QueryPostsPage) {
+			query: app.QueryPostsPage{PageSize: customPageSize, Cursor: "test-cursor"},
+			configureMock: func(_ *testing.T, m *mocks.PostService, q app.QueryPostsPage) {
 				m.On("PostsPageFromCursor", mock.Anything, q.Cursor, q.PageSize).Return(nil, errors.New("PostsPageFromCursor failed"))
 			},
 			shouldFail:    true,
@@ -58,10 +60,10 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
-			postService := NewMockPostService(t)
+			postService := mocks.NewPostService(t)
 			tc.configureMock(t, postService, tc.query)
 
-			handler := NewQueryPostsPageHandler(postService)
+			handler := app.NewQueryPostsPageHandler(postService)
 			_, err := handler.Handle(context.Background(), tc.query)
 
 			if tc.shouldFail {
@@ -72,29 +74,4 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 			assert.NoError(t, err)
 		})
 	}
-}
-
-func TestQueryPostsPage_setMissingArguments(t *testing.T) {
-	t.Parallel()
-
-	t.Run("sets defaults", func(t *testing.T) {
-		t.Parallel()
-
-		query := QueryPostsPage{}
-		expected := QueryPostsPage{PageSize: defaultPageSize}
-
-		query.setMissingArguments()
-		assert.Equal(t, expected, query)
-	})
-
-	t.Run("preserves values", func(t *testing.T) {
-		t.Parallel()
-		customPageSize := 15
-
-		query := QueryPostsPage{PageSize: customPageSize}
-		expected := QueryPostsPage{PageSize: customPageSize}
-
-		query.setMissingArguments()
-		assert.Equal(t, expected, query)
-	})
 }
