@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/aws/aws-lambda-go v1.40.0
+	github.com/caarlos0/env/v8 v8.0.0
 	github.com/golangci/golangci-lint v1.52.2
 	github.com/google/uuid v1.3.0
 	github.com/jomei/notionapi v1.12.0
