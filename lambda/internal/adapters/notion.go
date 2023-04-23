@@ -85,7 +85,7 @@ func (n *Notion) FindPostBySlug(ctx context.Context, slug string) (*app.Post, er
 	}
 
 	content := &bytes.Buffer{}
-	if err := n.converter.ConvertContext(ctx, notionPage.ID.String(), content); err != nil {
+	if err = n.converter.ConvertContext(ctx, notionPage.ID.String(), content); err != nil {
 		return nil, err
 	}
 
@@ -136,9 +136,9 @@ func (n *Notion) PostsPageFromCursor(ctx context.Context, cursor string, pageSiz
 
 func (n Notion) notionPagesToQuery(pages []notionapi.Page) ([]app.Post, error) {
 	queryPosts := make([]app.Post, 0, len(pages))
-	
-	for _, page := range pages {
-		post, err := n.notionPageToPost(&page)
+
+	for i := range pages {
+		post, err := n.notionPageToPost(&pages[i])
 		if err != nil {
 			return nil, err
 		}
@@ -229,13 +229,13 @@ func (n Notion) notionPageToPost(page *notionapi.Page) (*post.Post, error) {
 
 func (n Notion) postToQuery(post *post.Post) *app.Post {
 	queryPost := &app.Post{
-		Title: post.Title(),
-		Slug: post.Slug(),
-		Description: post.Description(),
+		Title:         post.Title(),
+		Slug:          post.Slug(),
+		Description:   post.Description(),
 		PublishedTime: post.PublishedTime(),
 		CoverImageURL: post.CoverImage().URL(),
-		Tags: post.Tags(),
-		Content: post.Content(),
+		Tags:          post.Tags(),
+		Content:       post.Content(),
 	}
 
 	if post.WasUpdated() {

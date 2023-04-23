@@ -6,6 +6,12 @@ import (
 	"github.com/jomei/notionapi"
 )
 
+const (
+	Heading1Level = 1
+	Heading2Level = 2
+	Heading3Level = 3
+)
+
 type Block interface {
 	Type() BlockType
 }
@@ -76,22 +82,22 @@ func (hb HeadingBlock) Type() BlockType {
 
 func asHeadingBlock[H Heading](b H) *HeadingBlock {
 	var hb *HeadingBlock
-	
+
 	switch v := any(b).(type) {
 	case *notionapi.Heading1Block:
 		hb = &HeadingBlock{
 			Text:  formatRichText(v.Heading1.RichText),
-			Level: 1,
+			Level: Heading1Level,
 		}
 	case *notionapi.Heading2Block:
 		hb = &HeadingBlock{
 			Text:  formatRichText(v.Heading2.RichText),
-			Level: 2,
+			Level: Heading2Level,
 		}
 	case *notionapi.Heading3Block:
 		hb = &HeadingBlock{
 			Text:  formatRichText(v.Heading3.RichText),
-			Level: 3,
+			Level: Heading3Level,
 		}
 	default:
 		panic("unsupported type")
@@ -197,21 +203,7 @@ func formatRichText(rts []notionapi.RichText) string {
 	for _, rt := range rts {
 		textPart := rt.PlainText
 		if rt.Annotations != nil {
-			if rt.Annotations.Code {
-				textPart = "`" + textPart + "`"
-			}
-			if rt.Annotations.Bold {
-				textPart = "**" + textPart + "**"
-			}
-			if rt.Annotations.Italic {
-				textPart = "*" + textPart + "*"
-			}
-			if rt.Annotations.Strikethrough {
-				textPart = "~~" + textPart + "~~"
-			}
-			if rt.Annotations.Underline {
-				textPart = "<u>" + textPart + "</u>"
-			}
+			textPart = addRichTextAnnotations(textPart, rt.Annotations)
 		}
 
 		if rt.Href != "" {
@@ -222,4 +214,24 @@ func formatRichText(rts []notionapi.RichText) string {
 	}
 
 	return text
+}
+
+func addRichTextAnnotations(s string, a *notionapi.Annotations) string {
+	if a.Code {
+		s = "`" + s + "`"
+	}
+	if a.Bold {
+		s = "**" + s + "**"
+	}
+	if a.Italic {
+		s = "*" + s + "*"
+	}
+	if a.Strikethrough {
+		s = "~~" + s + "~~"
+	}
+	if a.Underline {
+		s = "<u>" + s + "</u>"
+	}
+
+	return s
 }

@@ -2,9 +2,9 @@ package notion2md
 
 import (
 	"bytes"
-	"html/template"
 	"os"
 	"testing"
+	"text/template"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

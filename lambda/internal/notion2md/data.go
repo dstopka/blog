@@ -2,7 +2,6 @@ package notion2md
 
 import (
 	"context"
-	_ "embed"
 
 	"github.com/jomei/notionapi"
 )
@@ -24,14 +23,16 @@ func (c Converter) buildTmplData(ctx context.Context, pageID string) (*TemplateD
 }
 
 func (c Converter) getAllChildren(ctx context.Context, blockID notionapi.BlockID) (notionapi.Blocks, error) {
-	resp, err := c.client.GetChildren(ctx, notionapi.BlockID(blockID), nil)
+	resp, err := c.client.GetChildren(ctx, blockID, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	blocks := resp.Results
 	for resp.HasMore {
-		resp, err = c.client.GetChildren(ctx, notionapi.BlockID(blockID), &notionapi.Pagination{StartCursor: notionapi.Cursor(resp.NextCursor)})
+		resp, err = c.client.GetChildren(ctx, blockID, &notionapi.Pagination{
+			StartCursor: notionapi.Cursor(resp.NextCursor),
+		})
 		if err != nil {
 			return nil, err
 		}

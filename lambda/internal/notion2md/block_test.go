@@ -58,7 +58,7 @@ func TestFormatRichText(t *testing.T) {
 			},
 			expected: "~~strikethrough~~",
 		},
-		"underline annotation":         {
+		"underline annotation": {
 			input: []notionapi.RichText{
 				{
 					Annotations: &notionapi.Annotations{
@@ -69,10 +69,10 @@ func TestFormatRichText(t *testing.T) {
 			},
 			expected: "<u>underline</u>",
 		},
-		"with link":                    {
+		"with link": {
 			input: []notionapi.RichText{
 				{
-					Href: "github.com/dstopka",
+					Href:      "github.com/dstopka",
 					PlainText: "github",
 				},
 			},
@@ -82,8 +82,8 @@ func TestFormatRichText(t *testing.T) {
 			input: []notionapi.RichText{
 				{
 					Annotations: &notionapi.Annotations{
-						Bold: true,
-						Italic: true,
+						Bold:          true,
+						Italic:        true,
 						Strikethrough: true,
 					},
 					PlainText: "multiple",
@@ -97,13 +97,13 @@ func TestFormatRichText(t *testing.T) {
 					Annotations: &notionapi.Annotations{
 						Italic: true,
 					},
-					Href: "example.com",
+					Href:      "example.com",
 					PlainText: "link",
 				},
 			},
 			expected: "[*link*](example.com)",
 		},
-		"multiple words":               {
+		"multiple words": {
 			input: []notionapi.RichText{
 				{
 					Annotations: &notionapi.Annotations{
@@ -125,7 +125,7 @@ func TestFormatRichText(t *testing.T) {
 				},
 				{
 					PlainText: "link",
-					Href: "example.com",
+					Href:      "example.com",
 				},
 			},
 			expected: "**Bold beginning**, then plain, followed by *italic* and a [link](example.com)",

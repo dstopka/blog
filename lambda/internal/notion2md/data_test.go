@@ -42,7 +42,11 @@ func TestConverter_getAllChildren_success(t *testing.T) {
 
 	mockClient.On("GetChildren", mock.Anything, blockID, &notionapi.Pagination{
 		StartCursor: notionapi.Cursor("next-cursor-1"),
-	}).Return(func(_ context.Context, _ notionapi.BlockID, _ *notionapi.Pagination) (*notionapi.GetChildrenResponse, error) {
+	}).Return(func(
+		_ context.Context,
+		_ notionapi.BlockID,
+		_ *notionapi.Pagination,
+	) (*notionapi.GetChildrenResponse, error) {
 		childrenBlocks := notionapi.Blocks{
 			&notionapi.ParagraphBlock{
 				Paragraph: notionapi.Paragraph{
@@ -63,7 +67,11 @@ func TestConverter_getAllChildren_success(t *testing.T) {
 
 	mockClient.On("GetChildren", mock.Anything, blockID, &notionapi.Pagination{
 		StartCursor: notionapi.Cursor("next-cursor-2"),
-	}).Return(func(_ context.Context, _ notionapi.BlockID, _ *notionapi.Pagination) (*notionapi.GetChildrenResponse, error) {
+	}).Return(func(
+		_ context.Context,
+		_ notionapi.BlockID,
+		_ *notionapi.Pagination,
+	) (*notionapi.GetChildrenResponse, error) {
 		childrenBlocks := notionapi.Blocks{
 			&notionapi.ParagraphBlock{
 				Paragraph: notionapi.Paragraph{
