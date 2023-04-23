@@ -47,7 +47,10 @@ func TestQueryPostsPageHandler_Handle(t *testing.T) {
 		"PostsPageFromCursor failed": {
 			query: app.QueryPostsPage{PageSize: customPageSize, Cursor: "test-cursor"},
 			configureMock: func(_ *testing.T, m *mocks.PostService, q app.QueryPostsPage) {
-				m.On("PostsPageFromCursor", mock.Anything, q.Cursor, q.PageSize).Return(nil, errors.New("PostsPageFromCursor failed"))
+				m.On("PostsPageFromCursor", mock.Anything, q.Cursor, q.PageSize).Return(
+					nil,
+					errors.New("PostsPageFromCursor failed"),
+				)
 			},
 			shouldFail:    true,
 			expectedError: "PostsPageFromCursor failed",

@@ -4,8 +4,8 @@ import (
 	"context"
 	_ "embed"
 	"errors"
-	"html/template"
 	"io"
+	"text/template"
 )
 
 //go:embed templates/main.tmpl
@@ -45,9 +45,6 @@ func tmplFuncs() template.FuncMap {
 	return template.FuncMap{
 		"loop": func(n int) []int {
 			return make([]int, n)
-		},
-		"noescape": func(s string) template.HTML {
-			return template.HTML(s)
 		},
 	}
 }

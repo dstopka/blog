@@ -4,8 +4,12 @@ test:
 
 .PHONY: fmt
 fmt:
-	@gofmt -s -w .
+	@goimports -w .
 
 .PHONY: generate
 generate:
 	@go generate ./...
+
+.PHONY: lint
+lint:
+	@golangci-lint run

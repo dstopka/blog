@@ -35,6 +35,7 @@
 {{- end -}}
 
 {{- define "caption" -}}
+
 <figcaption>
 
 {{.}}
@@ -44,7 +45,7 @@
 
 {{- define "code" -}}
 ```{{.Language}}
-{{noescape .Code}}
+{{.Code}}
 ```
     {{- if .Caption -}}
         {{"\n"}}{{- template "caption" .Caption -}}
@@ -60,7 +61,7 @@
 {{- end -}}
 
 {{- define "image" -}}
-![]({{noescape .URL}})
+![]({{.URL}})
     {{- if .Caption -}}
         {{"\n"}}{{- template "caption" .Caption -}}
     {{- end -}}
