@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/dstopka/blog/lambda/internal/app"
@@ -94,13 +95,8 @@ func (n *Notion) FindPostBySlug(ctx context.Context, slug string) (*app.Post, er
 	return n.postToQuery(post), nil
 }
 
-// FirstPostsPage returns the first page of posts.
-func (n *Notion) FirstPostsPage(ctx context.Context, pageSize int) (*app.PostsPage, error) {
-	return n.PostsPageFromCursor(ctx, "", pageSize)
-}
-
-// PostsPageFromCursor returns the page of posts that start from the provided cursor.
-func (n *Notion) PostsPageFromCursor(ctx context.Context, cursor string, pageSize int) (*app.PostsPage, error) {
+// AllPosts returns all published posts.
+func (n *Notion) AllPosts(ctx context.Context) ([]app.Post, error) {
 	req := &notionapi.DatabaseQueryRequest{
 		Filter: notionapi.PropertyFilter{
 			Property: propertyPublished,
@@ -114,8 +110,6 @@ func (n *Notion) PostsPageFromCursor(ctx context.Context, cursor string, pageSiz
 				Direction: notionapi.SortOrderDESC,
 			},
 		},
-		PageSize:    pageSize,
-		StartCursor: notionapi.Cursor(cursor),
 	}
 
 	resp, err := n.client.Database.Query(ctx, notionapi.DatabaseID(n.postsDatabaseID), req)
@@ -123,15 +117,7 @@ func (n *Notion) PostsPageFromCursor(ctx context.Context, cursor string, pageSiz
 		return nil, err
 	}
 
-	posts, err := n.notionPagesToQuery(resp.Results)
-	if err != nil {
-		return nil, err
-	}
-
-	return &app.PostsPage{
-		Posts: posts,
-		Next:  resp.NextCursor.String(),
-	}, nil
+	return n.notionPagesToQuery(resp.Results)
 }
 
 func (n Notion) notionPagesToQuery(pages []notionapi.Page) ([]app.Post, error) {
@@ -144,6 +130,8 @@ func (n Notion) notionPagesToQuery(pages []notionapi.Page) ([]app.Post, error) {
 		}
 		queryPosts = append(queryPosts, *n.postToQuery(post))
 	}
+
+	log.Printf("%#+v\n", queryPosts)
 
 	return queryPosts, nil
 }
