@@ -21,10 +21,10 @@ func NewQueryPostHandler(cfg PostsHandlersConfig) app.QueryPostHandler {
 	return app.NewQueryPostHandler(notion)
 }
 
-// NewQueryPostsPageHandler creates a new QueryPostsPageHandler using the provided config.
-func NewQueryPostsPageHandler(cfg PostsHandlersConfig) app.QueryPostsPageHandler {
+// NewQueryAllPostsHandler creates a new QueryAllPostsHandler using the provided config.
+func NewQueryAllPostsHandler(cfg PostsHandlersConfig) app.QueryAllPostsHandler {
 	client := notionapi.NewClient(notionapi.Token(cfg.GetNotionAuthToken()))
 	notion := adapters.NewNotion(client, cfg.GetPostsDatabaseID())
 
-	return app.NewQueryPostsPageHandler(notion)
+	return app.NewQueryAllPostsHandler(notion)
 }
