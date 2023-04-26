@@ -84,5 +84,6 @@ func (l QueryPostsPageLambda) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 	}
 
 	page := postsPageModelToResponse(pageModel)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	httpResponse(w, r, page, http.StatusOK)
 }
