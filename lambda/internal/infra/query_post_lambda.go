@@ -67,5 +67,6 @@ func (l QueryPostLambda) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	post := postModelToResponse(postModel)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	httpResponse(w, r, post, http.StatusOK)
 }
