@@ -13,9 +13,3 @@ type Post struct {
 	PublishedTime time.Time
 	UpdatedTime   *time.Time
 }
-
-// PostsPage represents a page which contains posts.
-type PostsPage struct {
-	Posts []Post
-	Next  string
-}

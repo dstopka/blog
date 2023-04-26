@@ -21,8 +21,10 @@ func main() {
 	lambda := infra.NewQueryPostLambda(handler)
 
 	if cfg.IsDev {
+		mux := http.NewServeMux()
+		mux.Handle("/posts", lambda)
 		addr := fmt.Sprintf(":%d", cfg.Port)
-		http.ListenAndServe(addr, lambda)
+		http.ListenAndServe(addr, mux)
 	} else {
 		awslambda.Start(lambda.ServeLambda)
 	}

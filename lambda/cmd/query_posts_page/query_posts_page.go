@@ -17,12 +17,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	handler := service.NewQueryPostsPageHandler(cfg)
-	lambda := infra.NewQueryPostsPageLambda(handler)
+	handler := service.NewQueryAllPostsHandler(cfg)
+	lambda := infra.NewQueryAllPostsLambda(handler)
 
 	if cfg.IsDev {
+		mux := http.NewServeMux()
+		mux.Handle("/posts", lambda)
 		addr := fmt.Sprintf(":%d", cfg.Port)
-		http.ListenAndServe(addr, lambda)
+		http.ListenAndServe(addr, mux)
 	} else {
 		awslambda.Start(lambda.ServeLambda)
 	}

@@ -9,8 +9,6 @@ import (
 )
 
 const (
-	QueryParamCursor   = "cursor"
-	QueryParamPageSize = "pageSize"
 	QueryParamSlug     = "slug"
 )
 
@@ -29,9 +27,8 @@ type Post struct {
 	UpdatedTime   *time.Time `json:"updatedTime,omitempty"`
 }
 
-type PostsPage struct {
+type Posts struct {
 	Posts      []Post `json:"posts"`
-	NextCursor string `json:"nextCursor,omitempty"`
 }
 
 type ErrorResponse struct {

@@ -65,14 +65,13 @@ func postModelToResponse(postModel *app.Post) Post {
 	}
 }
 
-func postsPageModelToResponse(pageModel *app.PostsPage) PostsPage {
-	posts := make([]Post, 0, len(pageModel.Posts))
-	for i := range pageModel.Posts {
-		posts = append(posts, postModelToResponse(&pageModel.Posts[i]))
+func postsModelToResponse(postsModel []app.Post) Posts {
+	posts := make([]Post, 0, len(postsModel))
+	for i := range postsModel {
+		posts = append(posts, postModelToResponse(&postsModel[i]))
 	}
 
-	return PostsPage{
-		Posts:      posts,
-		NextCursor: pageModel.Next,
+	return Posts{
+		Posts: posts,
 	}
 }
