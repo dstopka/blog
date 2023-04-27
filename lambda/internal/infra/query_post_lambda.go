@@ -28,23 +28,23 @@ func NewQueryPostLambda(handler app.QueryPostHandler) QueryPostLambda {
 func (l QueryPostLambda) ServeLambda(
 	ctx context.Context,
 	req events.APIGatewayProxyRequest,
-) *events.APIGatewayProxyResponse {
+) (*events.APIGatewayProxyResponse, error) {
 	slug, ok := req.QueryStringParameters[QueryParamSlug]
 	if !ok {
-		return lambdaErrorResponse(BadRequest("Query argument 'slug' is required, but not found"))
+		return lambdaErrorResponse(BadRequest("Query argument 'slug' is required, but not found")), nil
 	}
 
 	postModel, err := l.handler.Handle(ctx, app.QueryPost{Slug: slug})
 	if err != nil {
 		if errors.Is(err, app.ErrNotFound) {
-			return lambdaErrorResponse(NotFound())
+			return lambdaErrorResponse(NotFound()), nil
 		}
 		log.Println(err)
-		return lambdaErrorResponse(InternalServerError())
+		return lambdaErrorResponse(InternalServerError()), nil
 	}
 
 	post := postModelToResponse(postModel)
-	return lambdaResponse(post, http.StatusOK)
+	return lambdaResponse(post, http.StatusOK), nil
 }
 
 // ServeHTTP is an entrypoint for serving an http endpoint.

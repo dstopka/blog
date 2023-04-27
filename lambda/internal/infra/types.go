@@ -13,7 +13,7 @@ const (
 )
 
 type Lambda interface {
-	ServeLambda(context.Context, events.APIGatewayProxyRequest) *events.APIGatewayProxyResponse
+	ServeLambda(context.Context, events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error)
 }
 
 type Post struct {

@@ -27,15 +27,15 @@ func NewQueryAllPostsLambda(handler app.QueryAllPostsHandler) QueryAllPostsLambd
 func (l QueryAllPostsLambda) ServeLambda(
 	ctx context.Context,
 	req events.APIGatewayProxyRequest,
-) *events.APIGatewayProxyResponse {
+) (*events.APIGatewayProxyResponse, error) {
 	postsModel, err := l.handler.Handle(ctx)
 	if err != nil {
 		log.Println(err)
-		return lambdaErrorResponse(InternalServerError())
+		return lambdaErrorResponse(InternalServerError()), nil
 	}
 
 	posts := postsModelToResponse(postsModel)
-	return lambdaResponse(posts, http.StatusOK)
+	return lambdaResponse(posts, http.StatusOK), nil
 }
 
 // ServeHTTP is an entrypoint for serving an http endpoint.
