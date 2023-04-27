@@ -1,135 +1,154 @@
 <script lang="ts">
 	import { Hamburger } from 'svelte-hamburgers';
 	import { navlinks } from './nav-links';
+	import Socials from '$lib/Socials/Socials.svelte';
 
 	let open: boolean = false;
+	let y: number;
 </script>
 
-<nav id="navbar">
-	<div class="navbar-container">
-		<section class="navbar-socials">
-			<div class="socials-list">
-				<a href="https://github.com/dstopka">
-					<i class="fa-brands fa-github" />
-				</a>
-			</div>
-		</section>
-		<header class="navbar-header">
-			<a class="logo" href="/">Darek Stopka</a>
-			<div class="menu-inline">
-				{#each navlinks as link, i}
-					<a href={link.href}>{link.label}</a>
-				{/each}
-			</div>
-			<div id="hamburger">
-				<Hamburger bind:open --color="#292929" />
-			</div>
-		</header>
-		<div class:hidden={!open} class="menu-dropdown">
-			{#each navlinks as link}
-				<a href={link.href}>{link.label}</a>
-			{/each}
-			<div class="menu-socials">
-				<a href="https://github.com/dstopka"><i class="fa-brands fa-github" /></a>
+<svelte:window bind:scrollY={y} />
+
+<nav class="navbar" class:socials-hidden={y > 30}>
+	<section class="navbar-socials">
+		<div class="navbar-container">
+			<div class="socials-list margin-right-1">
+				<Socials color="dimmed" />
 			</div>
 		</div>
-	</div>
+	</section>
+	<header class="navbar-header">
+		<div class="navbar-container main-menu">
+			<div class="logo margin-left-1">
+				<a class="logo-light" href="/">Darek</a>
+				<a class="logo-dark" href="/">Stopka</a>
+			</div>
+			<div class="menu-inline margin-right-1">
+				{#each navlinks as link, i}
+					<a class="link" href={link.href}>
+						{link.label}
+					</a>
+				{/each}
+			</div>
+			<div class="hamburger">
+				<Hamburger bind:open --color="#292929" />
+			</div>
+		</div>
+		<div class="menu-dropdown margin-left-1" class:hidden={!open}>
+			{#each navlinks as link}
+				<a class="link" href={link.href}>{link.label}</a>
+			{/each}
+			<div class="socials-list">
+				<Socials color="dimmed" />
+			</div>
+		</div>
+	</header>
 </nav>
 
 <style>
-	#navbar {
+	.navbar {
 		width: 100%;
 		z-index: 10;
-		min-height: 50px;
-		border-bottom: 1px solid rgb(243, 243, 243);
 		position: fixed;
-		top: 0;
+		top: 0px;
 		background-color: rgb(252, 252, 252);
+		transition: top 0.5s ease 0s;
 	}
 
 	.navbar-container {
-		max-width: 60rem;
+		max-width: 55rem;
 		margin: auto;
-	}
-
-	.navbar-header {
-		margin: 0 1rem;
-		height: 50px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		height: 100%;
 	}
 
 	.navbar-socials {
 		border-bottom: 1px solid rgb(243, 243, 243);
+		width: 100%;
+		height: 30px;
 	}
 
-	.navbar-header,
-	.navbar-socials {
-		display: flex;
-		align-items: center;
-		/* margin: auto; */
+	.navbar-header {
+		border-bottom: 1px solid rgb(243, 243, 243);
+		height: 60px;
+		width: 100%;
+	}
+
+	.socials-list {
+		margin-left: auto;
+	}
+
+	.margin-right-1 {
+		margin-right: 1rem;
+	}
+
+	.margin-left-1 {
+		margin-left: 1rem;
 	}
 
 	.logo {
 		margin-right: auto;
-		/* padding: 15px; */
+		display: flex;
+		font-weight: 700;
 	}
 
-	a.logo {
+	.logo-light {
+		border: 1px solid rgb(41, 41, 41);
+		color: rgb(41, 41, 41);
+	}
+
+	.logo-dark {
+		background-color: rgb(41, 41, 41);
+		color: rgb(252, 252, 252);
+	}
+
+	.logo-light,
+	.logo-dark {
+		padding: 0.25rem 0.5rem;
+	}
+
+	a {
 		text-decoration: none;
-		color: inherit;
 		font-size: 1.25rem;
-		font-weight: bold;
+	}
+
+	.link {
+		text-transform: uppercase;
+		font-size: 0.9rem;
+		font-weight: 400;
+		color: inherit;
+	}
+
+	.hamburger {
+		display: none;
 	}
 
 	.menu-dropdown {
 		display: none;
-		padding: 0;
+		background-color: rgb(252, 252, 252);
 	}
 
-	#hamburger {
-		display: none;
-	}
-
-	.menu-inline {
-		margin-left: auto;
-		display: flex;
-		flex-direction: row;
-	}
-
-	.menu-inline a,
-	.menu-dropdown a {
-		text-decoration: none;
-		color: inherit;
-		position: relative;
-		text-transform: uppercase;
-		font-size: 0.9rem;
-		font-weight: 500;
-	}
-
-	.menu-inline a {
-		margin-left: 0.5rem;
-	}
-
-	.socials-list {
-		margin-left: auto;
-		margin-right: 1rem;
-	}
-
-	.socials-list {
-		display: flex;
-		flex-direction: row;
+	.menu-dropdown > * {
+		padding: 0.5rem 0;
+		width: 100%;
 	}
 
 	.menu-dropdown > :first-child {
 		padding-top: 1rem;
 	}
 
-	.menu-dropdown > * {
-		padding: 1rem 0;
-		border-top: 1px solid rgb(226, 226, 226);
+	.hidden {
+		display: none;
+	}
+
+	.socials-hidden {
+		top: -30px;
 	}
 
 	@media (max-width: 768px) {
-		#hamburger {
+		.hamburger {
 			display: initial;
 		}
 
@@ -140,25 +159,21 @@
 		.menu-dropdown {
 			display: flex;
 			flex-direction: column;
-			text-align: center;
 			color: rgb(41, 41, 41);
-			justify-content: center;
+			border-bottom: 1px solid rgb(243, 243, 243);
 		}
 
-		.menu-socials {
-			text-align: center;
-			display: flex;
-			justify-content: center;
-			flex-direction: row;
+		.navbar {
+			top: -30px;
 		}
 
-		.hidden {
-			display: none;
+		.navbar-header {
+			border-bottom: none;
 		}
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		.menu-dropdown a:hover {
+		.link:hover {
 			color: rgb(95, 187, 224);
 		}
 	}
