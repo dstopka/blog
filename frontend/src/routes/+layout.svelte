@@ -1,9 +1,6 @@
 <script lang="ts">
 	import Footer from '$lib/Footer/Footer.svelte';
 	import Navbar from '$lib/Navbar/Navbar.svelte';
-
-	// let mainElement: HTMLElement;
-	// $: mainElement && mainElement.setAttribute('--top', top)
 </script>
 
 <Navbar />
