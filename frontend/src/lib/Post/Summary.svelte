@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SubHeader from './SubHeader.svelte';
+	import SubHeader from './MetaDate.svelte';
 	import Tags from './Tags.svelte';
 
 	export let post: any;
@@ -7,13 +7,15 @@
 
 <article class="entry">
 	<header class="entry-header">
+		<div class="entry-date">
+			<SubHeader publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
+		</div>
 		<h2 class="entry-title">
 			<a href="/posts/{post.slug}">
 				{post.title}
 			</a>
 		</h2>
-		<div class="entry-meta">
-			<SubHeader publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
+		<div class="entry-tags">
 			{#if post.tags}
 				<Tags tags={post.tags} />
 			{/if}
@@ -31,8 +33,6 @@
 <style>
 	.entry {
 		border-top: 1px solid rgb(243, 243, 243);
-		padding-top: 1rem;
-		margin-top: 0.5rem;
 	}
 
 	.entry:first-child {
@@ -40,32 +40,31 @@
 	}
 
 	.entry-header {
-		padding: 0;
-		margin: 0;
+		margin: 0.5rem 0;
+		padding-top: 1rem;
 	}
 
-	.entry-header h2 a {
+	.entry-header a {
 		text-decoration: none;
 		color: inherit;
 	}
 
-	.entry-header h2 a:hover {
-		color: var(--blue);
-	}
-
 	.entry-title {
-		margin-top: 1rem;
-		margin-bottom: 0.25rem;
-		font-size: 2.5rem;
-		margin: 0;
+		font-size: 2rem;
+		line-height: normal;
 	}
 
-	.entry-meta {
-		margin: 0.25rem 0;
+	.entry-date,
+	.entry-tags {
 		display: flex;
 		flex-direction: row;
 		gap: 0.5rem;
 		flex-wrap: wrap;
+		line-height: normal;
+	}
+
+	.entry-tags {
+		margin-top: 0.5rem;
 	}
 
 	.entry-body {
@@ -73,23 +72,24 @@
 		flex-direction: row;
 		margin: auto;
 		margin: 0.5rem 0;
+		align-items: center;
 	}
 
 	.entry-body .entry-summary {
 		color: rgb(41, 41, 41);
 		margin: 0.5rem 0;
+		flex-grow: 1;
 	}
 
 	.entry-body .entry-cover {
-		margin-left: auto;
 		padding-left: 1rem;
 		margin-top: 0.5rem;
 	}
 
 	.entry-body img.entry-cover {
-		object-fit: cover;
-		width: 128px;
-		height: 128px;
+		object-fit: contain;
+		aspect-ratio: 1;
+		max-width: 30%;
 	}
 
 	.entry-footer {
@@ -101,10 +101,6 @@
 		text-decoration: none;
 		color: rgb(41, 41, 41);
 		font-size: 0.8rem;
-	}
-
-	.entry-footer a:hover {
-		color: rgb(95, 187, 224);
 	}
 
 	@media (max-width: 768px) {
@@ -125,8 +121,14 @@
 			padding: 0;
 		}
 
-		.entry-meta {
+		.entry-date {
 			flex-direction: column;
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		a:hover {
+			color: rgb(95, 187, 224);
 		}
 	}
 </style>

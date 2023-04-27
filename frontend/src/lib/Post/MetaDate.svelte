@@ -5,18 +5,18 @@
 	export let updatedTime: string;
 </script>
 
-<div class="sub-header">
-	<span class="sub-header-date">
-		Posted on {formatDate(publishedTime)}
+<div class="meta">
+	<span class="meta-date">
+		{formatDate(publishedTime)}
 	</span>
 	{#if updatedTime}
-		<span class="sub-header-date">•</span>
-		<span class="sub-header-date">updated on {formatDate(updatedTime)}</span>
+		<span class="meta-date">•</span>
+		<span class="meta-date">updated on {formatDate(updatedTime)}</span>
 	{/if}
 </div>
 
 <style>
-	.sub-header {
+	.meta {
 		display: flex;
 		flex-direction: row;
 		font-size: 1rem;
@@ -25,7 +25,7 @@
         gap: 0.25rem;
 	}
 
-	.sub-header-date {
+	.meta-date {
 		margin: 0.25rem 0;
 		flex-shrink: 0;
 		text-align: center;

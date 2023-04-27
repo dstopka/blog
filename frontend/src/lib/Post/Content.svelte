@@ -80,6 +80,10 @@
 		font-weight: 400 !important;
 	}
 
+	:global(pre) {
+		margin: 1.5rem 0;
+	}
+
 	/* Quote */
 
 	:global(.post-content blockquote) {
@@ -100,6 +104,7 @@
 	:global(.post-content figcaption) {
 		text-align: center;
 		font-size: 0.8rem;
+		margin-bottom: 1.5rem;
 	}
 
 	:global(.post-content figcaption p) {
@@ -114,5 +119,11 @@
 
 	:global(.post-content a) {
 		color: rgb(95, 187, 224);
+	}
+
+	/* Divider */
+
+	:global(hr) {
+		margin: 2rem 0;
 	}
 </style>

@@ -2,20 +2,22 @@
 	import Content from './Content.svelte';
 	import Giscus from '@giscus/svelte'
 	import Tags from './Tags.svelte';
-	import SubHeader from './SubHeader.svelte';
+	import SubHeader from './MetaDate.svelte';
 
 	export let post: any;
 </script>
 
 <section class="post">
 	<section class="post-header">
-		<h2 id="entry-title">{post.title}</h2>
 		<div class="entry-meta">
 			<SubHeader publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
 		</div>
-		<img class="entry-cover" src={post.coverImageURL} alt="" />
+		<h2 id="entry-title">{post.title}</h2>
 	</section>
-	<Content content={post.content} />
+	<div class="post-content">
+		<img class="entry-cover" src={post.coverImageURL} alt="" />
+		<Content content={post.content} />
+	</div>
 	<section class="post-tags">
 		<Tags tags={post.tags} />
 	</section>
@@ -36,6 +38,11 @@
 </section>
 
 <style>
+
+	.post-header {
+		margin: 1rem 0;
+	}
+
 	.entry-cover {
 		max-height: 400px;
 		object-fit: cover;
@@ -57,13 +64,16 @@
 
 	#entry-title {
 		font-size: 2.5rem;
-		margin: 2rem 0 0;
+		line-height: normal;
 	}
 
 	.post-tags {
 		padding: 2rem 0;
-		border-top: 1px solid rgb(203, 203, 203);
 		border-bottom: 1px solid rgb(203, 203, 203);
+	}
+
+	.post-content {
+		margin: 1rem 0;
 	}
 
 	.post-comments {
