@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Footer from '$lib/Footer/Footer.svelte';
 	import Navbar from '$lib/Navbar/Navbar.svelte';
+
+	// let mainElement: HTMLElement;
+	// $: mainElement && mainElement.setAttribute('--top', top)
 </script>
 
 <Navbar />
@@ -23,6 +26,8 @@
 		font-family: 'Rubik', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 		color: rgb(48, 48, 48);
 		line-height: 1.6;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
 	}
 
 	:global(body) {
@@ -32,7 +37,7 @@
 	}
 
 	.main {
-		margin-top: 50px;
+		padding-top: 90px;
 		background-color: rgb(252, 252, 252);
 		flex-grow: 1;
 	}
@@ -41,7 +46,6 @@
 		margin: auto;
 		max-width: 50rem;
 		padding: 0 2rem;
-		/* color: rgb(41, 41, 41); */
 		text-align: justify;
 	}
 </style>

@@ -3,15 +3,47 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
+
+	const { posts }: { posts: any[] } = data;
+	const pageSize: number = 10;
+
+	let page: number = 0;
+	let maxPage: number = Math.ceil(posts.length / pageSize) - 1;
+
+	let nextPage = () => {
+		if (page < maxPage) {
+			page++;
+			updatePosts();
+		}
+	};
+
+	let previousPage = () => {
+		if (page > 0) {
+			page--;
+			updatePosts();
+		}
+	};
+
+	let updatePosts = () => {
+		postsToDisplay = posts.slice(page * pageSize, (page + 1) * pageSize);
+	};
+
+	let postsToDisplay = posts.slice(0, pageSize);
 </script>
 
 <section class="posts-list">
-	{#each data.posts as post}
-		<Summary post={post}/>
+	{#each postsToDisplay as post}
+		<Summary {post} />
 	{/each}
 	<footer class="posts-list-footer">
-		<button class="pagination-previous-button">&larr; Previous page</button>
-		<button class="pagination-next-button">Next page &rarr;</button>
+		{#if page > 0}
+			<button class="pagination-previous-button" on:click={previousPage}>
+				&larr; Previous page
+			</button>
+		{/if}
+		{#if page < maxPage}
+		<button class="pagination-next-button" on:click={nextPage}> Next page &rarr; </button>
+		{/if}
 	</footer>
 </section>
 
