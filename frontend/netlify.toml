@@ -1,0 +1,7 @@
+[build]
+    functions = "functions/"
+    publish = "build/"
+    command = "make -C .. build"
+
+[functions]
+  directory = "../functions"
