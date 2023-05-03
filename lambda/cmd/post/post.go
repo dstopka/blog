@@ -22,7 +22,7 @@ func main() {
 
 	if cfg.IsDev {
 		mux := http.NewServeMux()
-		mux.Handle("/posts", lambda)
+		mux.Handle("/post", lambda)
 		addr := fmt.Sprintf(":%d", cfg.Port)
 		http.ListenAndServe(addr, mux)
 	} else {

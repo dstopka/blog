@@ -4,57 +4,69 @@
 
 <footer class="page-footer">
 	<section class="footer-main">
-		<div class="footer-main-container">
+		<div class="container row">
 			<div class="socials-list">
-				<Socials color={'light'} />
+				<Socials color={'var(--color-text-light-primary)'} colorHover={'var(--color-text-light-primary)'} inCircle={true} gap={'1rem'} />
 			</div>
 		</div>
 	</section>
 	<section class="footer-legal">
-		<div class="footer-legal-content">
-			<span> &copy; Copyright 2023 Dariusz Stopka </span>
+		<div class="container row">
+			<div class="footer-legal-content">
+				<span> &copy; Copyright 2023 Dariusz Stopka </span>
+			</div>
 		</div>
 	</section>
 </footer>
 
 <style>
 	.page-footer {
-		color: rgb(252, 252, 252);
-		background: linear-gradient(180deg, rgb(56, 56, 56) 0%, rgb(34, 34, 34) 100%);
+		margin-top: auto;
+		background-color: var(--color-footer-bg);
+	}
+
+	.container {
+		max-width: 60rem;
+		padding: 0 1rem;
+		margin: auto;
+	}
+
+	.row {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		height: 100%;
 	}
 
 	.footer-main {
-		height: 50px;
-		line-height: 50px;
+		font-size: 1.5rem;
+		padding: 0 1rem;
+		width: 100%;
 	}
 
 	.socials-list {
-		margin: auto;
-	}
-
-	.footer-main-container {
-		max-width: 60rem;
-		font-size: 1.5rem;
+		margin-left: auto;
+		padding: 1rem 0;
 		height: 100%;
-		display: flex;
-		flex-direction: row;
-		margin: auto;
 	}
 
 	.footer-legal {
-		padding: 0 1rem;
-		height: 50px;
-		line-height: 50px;
+		padding-bottom: 1rem;
 		font-size: 0.8rem;
+		color: var(--color-text-light-secondary);
 	}
 
 	.footer-legal-content {
-		text-align: left;
+		margin-right: auto;
 	}
 
 	@media (max-width: 768px) {
 		.footer-legal-content {
-			text-align: center;
+			margin: auto;
+		}
+
+		.socials-list {
+			margin: auto;
 		}
 	}
 </style>
