@@ -42,6 +42,7 @@
 
 	.entry:first-child {
 		border-top: 1px solid transparent;
+		padding-top: 0;
 	}
 
 	header {

@@ -3,6 +3,7 @@
 	import Giscus from '@giscus/svelte';
 	import Tags from './Tags.svelte';
 	import DateInfo from './Meta.svelte';
+	import HeaderLine from '$lib/HeaderLine/HeaderLine.svelte';
 
 	export let post: any;
 </script>
@@ -27,10 +28,7 @@
 	<footer>
 		<div class="wrap-lg">
 			<section class="tags">
-				<div class="tags-header">
-					<h2>Tags</h2>
-					<hr />
-				</div>
+				<HeaderLine header="Tags" size="1.75rem" />
 				<Tags tags={post.tags} />
 			</section>
 			<section class="post-comments">
@@ -56,12 +54,8 @@
 		padding: 0 1.5rem;
 	}
 
-	h1,
-	h2 {
-		color: var(--color-text-dark-headings);
-	}
-
 	h1 {
+		color: var(--color-text-dark-headings);
 		font-size: 4rem;
 		font-weight: 500;
 	}
@@ -100,19 +94,6 @@
 	.tags {
 		padding: 2rem 0;
 		font-size: 1rem;
-	}
-
-	.tags-header {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.tags-header hr {
-		width: 100%;
-		background-color: var(--color-logo-secondary-bg);
-		height: 1px;
-		border: none;
 	}
 
 	.content {
