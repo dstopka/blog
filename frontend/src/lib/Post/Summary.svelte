@@ -2,31 +2,31 @@
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-	import SubHeader from './DateInfo.svelte';
+	import Meta from './Meta.svelte';
 	import Tags from './Tags.svelte';
 
 	export let post: any;
 </script>
 
 <article class="entry">
-	<header class="entry-header">
-		<SubHeader publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
-		<h2 class="entry-title">
+	<header>
+		<h2>
 			<a href="/posts/{post.slug}">
 				{post.title}
 			</a>
 		</h2>
-		<div class="entry-tags">
+		<div class="subheader">
+			<Meta publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
 			{#if post.tags}
 				<Tags tags={post.tags} />
 			{/if}
 		</div>
 	</header>
-	<div class="entry-body">
+	<section class="entry-body">
 		<p class="entry-summary">{post.description}</p>
 		<img class="entry-cover" src={post.coverImageURL} alt="" />
-	</div>
-	<footer class="entry-footer">
+	</section>
+	<footer>
 		<a href="/posts/{post.slug}">
 			Read more
 			<Fa icon={faArrowRight} />
@@ -35,10 +35,6 @@
 </article>
 
 <style>
-	h2 {
-		color: var(--color-headers);
-	}
-
 	.entry {
 		border-top: 1px solid var(--color-bg-gray);
 		padding: 1rem 0;
@@ -48,32 +44,31 @@
 		border-top: 1px solid transparent;
 	}
 
-	.entry-header {
+	header {
 		margin: 0.5rem 0;
 		padding-top: 1rem;
 	}
 
-	.entry-header a {
+	header a {
 		text-decoration: none;
 		color: inherit;
 	}
 
-	.entry-title {
+	h2 {
 		font-size: 2rem;
 		line-height: normal;
 		color: var(--color-text-dark-headings);
 	}
 
-	.entry-tags {
+	.subheader {
 		display: flex;
 		flex-direction: row;
-		gap: 0.5rem;
+		align-items: center;
 		flex-wrap: wrap;
-		line-height: normal;
-	}
-
-	.entry-tags {
-		margin-top: 0.5rem;
+		gap: 0.5rem;
+		margin: 0.5rem 0;
+		font-weight: 300;
+		font-size: 0.875rem;
 	}
 
 	.entry-body {
@@ -87,34 +82,39 @@
 	.entry-summary {
 		margin: 0.5rem 0;
 		flex-grow: 1;
-		font-size: 0.9rem;
+		font-size: 1.125rem;
+		-webkit-font-smoothing: antialiased;
+		line-height: 1.75rem;
 	}
 
 	.entry-cover {
-		padding-left: 1rem;
+		margin-left: 1rem;
 		margin-bottom: auto;
 		margin-top: 0.5rem;
+		object-fit: cover;
+		width: 50%;
+		border-radius: 1rem;
 	}
 
-	img.entry-cover {
-		object-fit: contain;
-		width: 30%;
+	footer {
+		margin-top: 1.5rem;
 	}
 
-	.entry-footer {
-		margin: 1.5rem 0;
-	}
-
-	.entry-footer a {
+	footer a {
 		text-transform: uppercase;
 		text-decoration: none;
 		color: var(--color-text-dark-decorator);
-		font-size: 0.8rem;
+		font-size: 0.875rem;
 		font-weight: 400;
 		line-height: normal;
 	}
 
 	@media (max-width: 768px) {
+		.subheader {
+			flex-direction: column;
+			align-items: start;
+		}
+
 		.entry-body {
 			display: flex;
 			flex-direction: column-reverse;
@@ -122,7 +122,6 @@
 		}
 
 		.entry-body img.entry-cover {
-			object-fit: cover;
 			width: 100%;
 			aspect-ratio: initial;
 		}
@@ -134,7 +133,7 @@
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		.entry-footer a:hover {
+		footer a:hover {
 			color: var(--color-text-dark-headings);
 		}
 	}
