@@ -26,7 +26,7 @@
 	}
 
 	.container {
-		max-width: 60rem;
+		max-width: 70rem;
 		padding: 0 1rem;
 		margin: auto;
 	}
@@ -39,7 +39,7 @@
 	}
 
 	.footer-main {
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		padding: 0 1rem;
 		width: 100%;
 	}
@@ -52,7 +52,7 @@
 
 	.footer-legal {
 		padding-bottom: 1rem;
-		font-size: 0.8rem;
+		font-size: 0.75rem;
 		color: var(--color-text-light-secondary);
 	}
 

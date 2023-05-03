@@ -1,54 +1,86 @@
 <script lang="ts">
 	import Content from './Content.svelte';
-	import Giscus from '@giscus/svelte'
+	import Giscus from '@giscus/svelte';
 	import Tags from './Tags.svelte';
-	import DateInfo from './DateInfo.svelte';
+	import DateInfo from './Meta.svelte';
 
 	export let post: any;
 </script>
 
 <section class="post">
-	<header>
-		<div class="entry-meta">
+	<header class="wrap-lg">
+		<div class="title">
+			<h1>{post.title}</h1>
+		</div>
+		<div class="meta">
 			<DateInfo publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
 		</div>
-		<h2 id="entry-title">{post.title}</h2>
+		<div class="cover">
+			<img class="entry-cover" src={post.coverImageURL} alt="" />
+		</div>
 	</header>
-	<section class="post-content">
-		<img class="entry-cover" src={post.coverImageURL} alt="" />
-		<Content content={post.content} />
+	<section class="content">
+		<div class="wrap-md">
+			<Content content={post.content} />
+		</div>
 	</section>
-	<section class="tags">
-		<Tags tags={post.tags} />
-	</section>
-	<section class="post-comments">
-		<Giscus
-			repo="dstopka/blog-discussions"
-			repoId="R_kgDOJbkkow"
-			category="Announcements"
-			categoryId="DIC_kwDOJbkko84CWD9J"
-			mapping="og:title"
-			strict="0"
-			reactionsEnabled="1"
-			emitMetadata="0"
-			theme="light"
-			lang="en"
-		/>
-	</section>
+	<footer>
+		<div class="wrap-lg">
+			<section class="tags">
+				<div class="tags-header">
+					<h2>Tags</h2>
+					<hr />
+				</div>
+				<Tags tags={post.tags} />
+			</section>
+			<section class="post-comments">
+				<Giscus
+					repo="dstopka/blog-discussions"
+					repoId="R_kgDOJbkkow"
+					category="Announcements"
+					categoryId="DIC_kwDOJbkko84CWD9J"
+					mapping="og:title"
+					strict="0"
+					reactionsEnabled="1"
+					emitMetadata="0"
+					theme="light"
+					lang="en"
+				/>
+			</section>
+		</div>
+	</footer>
 </section>
 
 <style>
+	.post {
+		padding: 0 1.5rem;
+	}
 
-	header {
-		margin: 1rem 0;
+	h1,
+	h2 {
 		color: var(--color-text-dark-headings);
 	}
 
+	h1 {
+		font-size: 4rem;
+		font-weight: 500;
+	}
+
+	.wrap-lg {
+		max-width: 55rem;
+		margin: auto;
+	}
+
+	.wrap-md {
+		margin: auto;
+		max-width: 45rem;
+	}
+
 	.entry-cover {
-		max-height: 400px;
 		object-fit: cover;
 		width: 100%;
 		margin: 0.5rem 0;
+		border-radius: 1rem;
 	}
 
 	.post {
@@ -57,28 +89,56 @@
 		margin-top: 1rem;
 	}
 
-	.entry-meta {
+	.meta {
 		display: flex;
 		flex-direction: row;
-		font-size: 0.9rem;
-		font-weight: 400;
-	}
-
-	#entry-title {
-		font-size: 2.5rem;
-		line-height: normal;
+		font-size: 1rem;
+		font-weight: 300;
+		margin: 0.5rem 0;
 	}
 
 	.tags {
 		padding: 2rem 0;
-		border-bottom: 1px solid var(--color-bg-gray);
+		font-size: 1rem;
 	}
 
-	.post-content {
-		margin: 0 0;
+	.tags-header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.tags-header hr {
+		width: 100%;
+		background-color: var(--color-logo-secondary-bg);
+		height: 1px;
+		border: none;
+	}
+
+	.content {
+		width: 100%;
+		text-align: justify;
+		font-size: 1.25rem;
+		line-height: 1.875rem;
+		-webkit-font-smoothing: antialiased;
 	}
 
 	.post-comments {
 		margin: 2rem 0;
+	}
+
+	@media (max-width: 768px) {
+		.content {
+			font-size: 1rem;
+			line-height: 1.75rem;
+		}
+
+		.meta {
+			font-size: 0.875rem;
+		}
+
+		h1 {
+			font-size: 2.75rem;
+		}
 	}
 </style>

@@ -13,17 +13,15 @@
 		display: flex;
 		flex-wrap: wrap;
 		row-gap: 0.5rem;
-        column-gap: 0.5rem;
+		column-gap: 0.5rem;
 		align-items: center;
 	}
 
 	.tag {
-		padding: 0.2rem 0.6rem;
-        background-color: var(--color-bg-gray);
+		padding: 0.125rem 0.5rem;
+		background-color: var(--color-bg-gray);
 		border-radius: 0.4rem;
 		color: var(--color-text-dark-gray);
-		/* color: #FFF; */
-		font-weight: 400;
-        font-size: 0.9rem;
+		font-weight: 300;
 	}
 </style>
