@@ -34,35 +34,26 @@
 </svelte:head>
 
 <section class="post-content">
-	<div>{@html marked(content)}</div>
+	{@html marked(content)}
 </section>
 
 <style>
-	.post-content {
+	section {
 		margin: 0.5rem 0;
-		line-height: 1.7;
-	}
-
-	/* Text */
-
-	:global(.post-content p) {
-		font-size: 1.1rem;
 	}
 
 	/* Headings */
 
 	:global(.post-content h1, .post-content h2, .post-content h3) {
 		color: var(--color-text-dark-headings);
+		margin: 1rem 0;
 	}
 
 	:global(.post-content h1) {
-		font-size: 1.8rem;
-		font-weight: 700;
-		margin-block-start: 0.5em;
-		margin-block-end: 0.5em;
+		font-size: 1.75rem;
 	}
 
-	/* Taks list */
+	/* Tasks list */
 
 	:global(.post-content li:has(input)) {
 		list-style-type: none;
@@ -89,6 +80,8 @@
 	}
 
 	:global(.post-content code) {
+		font-size: 1rem;
+		line-height: 1.5rem;
 		font-family: 'Ubuntu Mono', monospace;
 		tab-size: 4;
 	}
@@ -110,11 +103,7 @@
 		line-height: normal;
 		border-radius: 0.2rem;
 		font-weight: 300;
-	}
-
-	:global(.post-content blockquote:before) {
-		font-family: "Font Awesome 5 Free";
-		content: "\f10d";
+		font-size: 1rem;
 	}
 
 	:global(.post-content blockquote p) {
@@ -143,6 +132,7 @@
 	:global(.post-content a) {
 		color: var(--color-text-dark-decorator);
 		text-decoration: none;
+		font-weight: bold;
 	}
 
 	/* Divider */

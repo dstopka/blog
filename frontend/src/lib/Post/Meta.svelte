@@ -19,14 +19,11 @@
 	.meta {
 		display: flex;
 		flex-direction: row;
-		font-size: 1rem;
-		font-weight: 400;
 		color: var(--color-text-dark-primary);
-        gap: 0.25rem;
+		gap: 0.25rem;
 	}
 
 	.meta-date {
-		margin: 0.25rem 0;
 		flex-shrink: 0;
 		text-align: center;
 	}

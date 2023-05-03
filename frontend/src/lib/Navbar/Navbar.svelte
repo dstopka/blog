@@ -7,7 +7,7 @@
 	let y: number;
 
 	let resize: boolean;
-	$: if (y) resize = y > 40;
+	$: if (y) resize = y >= 40;
 </script>
 
 <svelte:window bind:scrollY={y} />
@@ -16,11 +16,11 @@
 	<section class="navbar-socials">
 		<div class="container row center">
 			<div class="socials-list margin-right-1">
-				<Socials color="var(--color-text-light-primary)" colorHover="var(--color-text-light-secondary)" inCircle={false} gap={'0.5rem'} />
+				<Socials color="var(--color-text-light-primary)" colorHover="var(--color-logo-secondary-bg)" inCircle={false} gap={'0.5rem'} />
 			</div>
 		</div>
 	</section>
-	<header class="shadow-btm">
+	<header>
 		<div class="container row center">
 			<div class="logo margin-left-1">
 				<a class="logo-foreground" href="/">
@@ -39,7 +39,7 @@
 				<Hamburger bind:open --color="var(--color-text-dark-primary)" />
 			</div>
 		</div>
-		<div class="dropdown column container shadow-btm" class:hidden={!open}>
+		<div class="dropdown column container" class:hidden={!open}>
 			{#each navlinks as link}
 				<a class="link" href={link.href}>{link.label}</a>
 			{/each}
@@ -60,15 +60,8 @@
 		transition: top 0.5s ease 0s;
 	}
 
-	.shadow-btm {
-		-webkit-box-shadow: 0px 2px 10px rgb(237, 239, 240), 0px 1px 2px -1px rgb(96, 109, 130);
-		-moz-box-shadow: 0px 2px 10px rgb(237, 239, 240), 0px 1px 2px -1px rgb(96, 109, 130);
-		box-shadow: 0px 2px 10px rgb(237, 239, 240), 0px 1px 2px -1px rgb(96, 109, 130);
-	}
-
 	.container {
-		max-width: 60rem;
-		padding: 0 1rem;
+		max-width: 70rem;
 	}
 
 	.center {
@@ -84,19 +77,19 @@
 
 	.navbar-socials {
 		width: 100%;
-		height: 30px;
+		height: 40px;
 		background-color: var(--color-navbar-socials-bg);
 	}
 
 	header {
-		height: 75px;
+		height: 80px;
 		width: 100%;
 	}
 
 	.socials-list {
 		margin-left: auto;
 		height: 100%;
-		font-size: 1.2rem;
+		font-size: 1.125rem;
 	}
 
 	.margin-right-1 {
@@ -110,7 +103,6 @@
 	.logo {
 		margin-right: auto;
 		display: flex;
-		font-weight: 700;
 	}
 
 	.logo a {
@@ -125,8 +117,8 @@
 		left: 3px;
 		width: 100%;
 		height: 100%;
-		background-color: var(--color-logo-secondary-bg);
 		transform: translateZ(-10px);
+		background-color: var(--color-logo-secondary-bg);
 	}
 	
 	.logo-foreground {
@@ -144,15 +136,14 @@
 
 	a {
 		text-decoration: none;
-		font-size: 1.25rem;
+		font-size: 1.125rem;
 	}
 
 	.link {
-		font-size: 1rem;
 		font-weight: 400;
-		color: inherit;
 		color: var(--color-text-dark-primary);
 		transition: all 0.2s ease-in-out;
+		border-bottom: 1px solid transparent;
 	}
 
 	.menu-inline {
@@ -179,7 +170,7 @@
 	}
 
 	.socials-hidden {
-		top: -30px;
+		top: -40px;
 	}
 
 	@media (max-width: 768px) {
@@ -198,7 +189,7 @@
 		}
 
 		.navbar {
-			top: -30px;
+			top: -40px;
 		}
 
 		.hidden {

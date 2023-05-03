@@ -10,15 +10,10 @@
 <Footer />
 
 <style>
-	/* :global(html, body) {
-		overflow:initial !important;
-	} */
-
 	:global(*) {
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		/* font-size: inherit; */
 	}
 
 	:root {
@@ -39,8 +34,8 @@
 	}
 
 	:global(body) {
-		font-family: 'Rubik', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-		line-height: 1.4;
+		font-family: 'Rubik', ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+		font-feature-settings: normal;
 		background-color: var(--color-bg-primary);
 		color: var(--color-text-dark-primary);
 		min-height: 100vh;
@@ -50,17 +45,14 @@
 	}
 
 	main {
-		padding: 105px 2rem 0 2rem;
-		margin: auto;
-		max-width: 48rem;
-		text-align: justify;
+		padding-top: 120px;
 		transition: padding-top 0.5s ease 0s;
 		flex-grow: 1;
 	}
 
 	@media (max-width: 768px) {
 		main {
-			padding-top: 75px;
+			padding-top: 80px;
 		}
 	}
 </style>

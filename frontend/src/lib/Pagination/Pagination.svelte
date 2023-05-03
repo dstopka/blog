@@ -64,17 +64,17 @@
 		border: none;
 	}
 
+	.pagination-previous-button {
+		margin-right: auto;
+	}
+	
+	.pagination-next-button {
+		margin-left: auto;
+	}
+
 	@media (hover: hover) and (pointer: fine) {
 		button:hover {
 			background-color: var(--color-logo-secondary-bg);
 		}
-	}
-
-	.pagination-previous-button {
-		margin-right: auto;
-	}
-
-	.pagination-next-button {
-		margin-left: auto;
 	}
 </style>
