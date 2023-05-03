@@ -1,5 +1,8 @@
 <script lang="ts">
-	import SubHeader from './MetaDate.svelte';
+	import Fa from 'svelte-fa/src/fa.svelte';
+	import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
+	import SubHeader from './DateInfo.svelte';
 	import Tags from './Tags.svelte';
 
 	export let post: any;
@@ -7,9 +10,7 @@
 
 <article class="entry">
 	<header class="entry-header">
-		<div class="entry-date">
-			<SubHeader publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
-		</div>
+		<SubHeader publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
 		<h2 class="entry-title">
 			<a href="/posts/{post.slug}">
 				{post.title}
@@ -26,13 +27,21 @@
 		<img class="entry-cover" src={post.coverImageURL} alt="" />
 	</div>
 	<footer class="entry-footer">
-		<a href="/posts/{post.slug}">Read more &rarr;</a>
+		<a href="/posts/{post.slug}">
+			Read more
+			<Fa icon={faArrowRight} />
+		</a>
 	</footer>
 </article>
 
 <style>
+	h2 {
+		color: var(--color-headers);
+	}
+
 	.entry {
-		border-top: 1px solid rgb(243, 243, 243);
+		border-top: 1px solid var(--color-bg-gray);
+		padding: 1rem 0;
 	}
 
 	.entry:first-child {
@@ -52,9 +61,9 @@
 	.entry-title {
 		font-size: 2rem;
 		line-height: normal;
+		color: var(--color-text-dark-headings);
 	}
 
-	.entry-date,
 	.entry-tags {
 		display: flex;
 		flex-direction: row;
@@ -75,32 +84,34 @@
 		align-items: center;
 	}
 
-	.entry-body .entry-summary {
-		color: rgb(41, 41, 41);
+	.entry-summary {
 		margin: 0.5rem 0;
 		flex-grow: 1;
+		font-size: 0.9rem;
 	}
 
-	.entry-body .entry-cover {
+	.entry-cover {
 		padding-left: 1rem;
+		margin-bottom: auto;
 		margin-top: 0.5rem;
 	}
 
-	.entry-body img.entry-cover {
+	img.entry-cover {
 		object-fit: contain;
-		aspect-ratio: 1;
-		max-width: 30%;
+		width: 30%;
 	}
 
 	.entry-footer {
-		margin: 0.5rem 0;
+		margin: 1.5rem 0;
 	}
 
 	.entry-footer a {
 		text-transform: uppercase;
 		text-decoration: none;
-		color: rgb(41, 41, 41);
+		color: var(--color-text-dark-decorator);
 		font-size: 0.8rem;
+		font-weight: 400;
+		line-height: normal;
 	}
 
 	@media (max-width: 768px) {
@@ -113,22 +124,18 @@
 		.entry-body img.entry-cover {
 			object-fit: cover;
 			width: 100%;
-			height: 100%;
+			aspect-ratio: initial;
 		}
 
 		.entry-body .entry-cover {
 			margin: 1rem 0 0.5rem 0;
 			padding: 0;
 		}
-
-		.entry-date {
-			flex-direction: column;
-		}
 	}
 
 	@media (hover: hover) and (pointer: fine) {
-		a:hover {
-			color: rgb(95, 187, 224);
+		.entry-footer a:hover {
+			color: var(--color-text-dark-headings);
 		}
 	}
 </style>

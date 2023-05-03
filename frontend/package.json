@@ -35,10 +35,13 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fortawesome/fontawesome-free": "^6.4.0",
+		"@fortawesome/fontawesome-svg-core": "^6.4.0",
+		"@fortawesome/free-brands-svg-icons": "^6.4.0",
+		"@fortawesome/free-solid-svg-icons": "^6.4.0",
 		"@giscus/svelte": "^2.2.8",
 		"highlight.js": "^11.7.0",
 		"luxon": "^3.3.0",
+		"svelte-fa": "^3.0.3",
 		"svelte-hamburgers": "^4.0.1"
 	}
 }
