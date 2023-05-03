@@ -21,7 +21,7 @@
 		flex-direction: row;
 		font-size: 1rem;
 		font-weight: 400;
-		color: rgb(74, 74, 74);
+		color: var(--color-text-dark-primary);
         gap: 0.25rem;
 	}
 

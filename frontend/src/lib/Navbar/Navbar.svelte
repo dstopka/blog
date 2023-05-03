@@ -5,25 +5,30 @@
 
 	let open: boolean = false;
 	let y: number;
+
+	let resize: boolean;
+	$: if (y) resize = y > 40;
 </script>
 
 <svelte:window bind:scrollY={y} />
 
-<nav class="navbar" class:socials-hidden={y > 30}>
+<nav class="navbar" class:socials-hidden={resize}>
 	<section class="navbar-socials">
-		<div class="navbar-container">
+		<div class="container row center">
 			<div class="socials-list margin-right-1">
-				<Socials color="dimmed" />
+				<Socials color="var(--color-text-light-primary)" colorHover="var(--color-text-light-secondary)" inCircle={false} gap={'0.5rem'} />
 			</div>
 		</div>
 	</section>
-	<header class="navbar-header">
-		<div class="navbar-container main-menu">
+	<header class="shadow-btm">
+		<div class="container row center">
 			<div class="logo margin-left-1">
-				<a class="logo-light" href="/">Darek</a>
-				<a class="logo-dark" href="/">Stopka</a>
+				<a class="logo-foreground" href="/">
+					<span class="logo-behind" />
+					Darek Stopka
+				</a>
 			</div>
-			<div class="menu-inline margin-right-1">
+			<div class="menu-inline row margin-right-1">
 				{#each navlinks as link, i}
 					<a class="link" href={link.href}>
 						{link.label}
@@ -31,15 +36,15 @@
 				{/each}
 			</div>
 			<div class="hamburger">
-				<Hamburger bind:open --color="#292929" />
+				<Hamburger bind:open --color="var(--color-text-dark-primary)" />
 			</div>
 		</div>
-		<div class="menu-dropdown margin-left-1" class:hidden={!open}>
+		<div class="dropdown column container shadow-btm" class:hidden={!open}>
 			{#each navlinks as link}
 				<a class="link" href={link.href}>{link.label}</a>
 			{/each}
 			<div class="socials-list">
-				<Socials color="dimmed" />
+				<Socials color="var(--color-text-dark-primary)" colorHover="var(--color-text-dark-headings)" inCircle={false} gap={'0.5rem'} />
 			</div>
 		</div>
 	</header>
@@ -51,13 +56,26 @@
 		z-index: 10;
 		position: fixed;
 		top: 0px;
-		background-color: rgb(252, 252, 252);
+		background-color: var(--color-bg-primary);
 		transition: top 0.5s ease 0s;
 	}
 
-	.navbar-container {
-		max-width: 55rem;
+	.shadow-btm {
+		-webkit-box-shadow: 0px 2px 10px rgb(237, 239, 240), 0px 1px 2px -1px rgb(96, 109, 130);
+		-moz-box-shadow: 0px 2px 10px rgb(237, 239, 240), 0px 1px 2px -1px rgb(96, 109, 130);
+		box-shadow: 0px 2px 10px rgb(237, 239, 240), 0px 1px 2px -1px rgb(96, 109, 130);
+	}
+
+	.container {
+		max-width: 60rem;
+		padding: 0 1rem;
+	}
+
+	.center {
 		margin: auto;
+	}
+
+	.row {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -65,19 +83,20 @@
 	}
 
 	.navbar-socials {
-		border-bottom: 1px solid rgb(243, 243, 243);
 		width: 100%;
 		height: 30px;
+		background-color: var(--color-navbar-socials-bg);
 	}
 
-	.navbar-header {
-		border-bottom: 1px solid rgb(243, 243, 243);
-		height: 60px;
+	header {
+		height: 75px;
 		width: 100%;
 	}
 
 	.socials-list {
 		margin-left: auto;
+		height: 100%;
+		font-size: 1.2rem;
 	}
 
 	.margin-right-1 {
@@ -94,18 +113,32 @@
 		font-weight: 700;
 	}
 
-	.logo-light {
-		border: 1px solid rgb(41, 41, 41);
-		color: rgb(41, 41, 41);
+	.logo a {
+		font-weight: 500;
+		font-size: 1.4rem;
+		text-transform: uppercase;
 	}
 
-	.logo-dark {
-		background-color: rgb(41, 41, 41);
-		color: rgb(252, 252, 252);
+	.logo-behind {
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		width: 100%;
+		height: 100%;
+		background-color: var(--color-logo-secondary-bg);
+		transform: translateZ(-10px);
+	}
+	
+	.logo-foreground {
+		background-color: var(--color-logo-primary-bg);
+		color: var(--color-text-light-primary);
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 0.2s ease-in-out;
 	}
 
-	.logo-light,
-	.logo-dark {
+	.logo-behind,
+	.logo-foreground {
 		padding: 0.25rem 0.5rem;
 	}
 
@@ -115,32 +148,34 @@
 	}
 
 	.link {
-		text-transform: uppercase;
-		font-size: 0.9rem;
+		font-size: 1rem;
 		font-weight: 400;
 		color: inherit;
+		color: var(--color-text-dark-primary);
+		transition: all 0.2s ease-in-out;
+	}
+
+	.menu-inline {
+		height: 100%;
 	}
 
 	.hamburger {
 		display: none;
+		height: 100%;
 	}
 
-	.menu-dropdown {
+	.dropdown {
 		display: none;
-		background-color: rgb(252, 252, 252);
+		background-color: var(--color-bg-primary);
 	}
 
-	.menu-dropdown > * {
-		padding: 0.5rem 0;
+	.dropdown > * {
+		padding: 0.5rem 1rem;
 		width: 100%;
 	}
 
-	.menu-dropdown > :first-child {
+	.dropdown > :first-child {
 		padding-top: 1rem;
-	}
-
-	.hidden {
-		display: none;
 	}
 
 	.socials-hidden {
@@ -149,32 +184,36 @@
 
 	@media (max-width: 768px) {
 		.hamburger {
-			display: initial;
+			display: flex;
+			text-align: center;
 		}
 
 		.menu-inline {
 			display: none;
 		}
 
-		.menu-dropdown {
+		.column {
 			display: flex;
 			flex-direction: column;
-			color: rgb(41, 41, 41);
-			border-bottom: 1px solid rgb(243, 243, 243);
 		}
 
 		.navbar {
 			top: -30px;
 		}
 
-		.navbar-header {
-			border-bottom: none;
+		.hidden {
+			display: none;
 		}
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.link:hover {
-			color: rgb(95, 187, 224);
+			color: var(--color-text-dark-headings);
+			border-bottom: 1px solid var(--color-logo-secondary-bg);
+		}
+
+		.logo-foreground:hover {
+			transform: rotate(-3deg);
 		}
 	}
 </style>

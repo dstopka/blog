@@ -41,14 +41,12 @@ func (l QueryAllPostsLambda) ServeLambda(
 // ServeHTTP is an entrypoint for serving an http endpoint.
 func (l QueryAllPostsLambda) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	postsModel, err := l.handler.Handle(r.Context())
-	// log.Printf("%#+v\n", postsModel)
 	if err != nil {
 		httpErrorResponse(w, r, InternalServerError())
 		return
 	}
 
 	posts := postsModelToResponse(postsModel)
-	// log.Printf("%#+v\n", posts)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	httpResponse(w, r, posts, http.StatusOK)
 }

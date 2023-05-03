@@ -19,9 +19,10 @@
 
 	.tag {
 		padding: 0.2rem 0.6rem;
-        background-color: rgb(236, 236, 236);
-		border-radius: 0.6rem;
-		color: rgb(74, 74, 74);
+        background-color: var(--color-bg-gray);
+		border-radius: 0.4rem;
+		color: var(--color-text-dark-gray);
+		/* color: #FFF; */
 		font-weight: 400;
         font-size: 0.9rem;
 	}
