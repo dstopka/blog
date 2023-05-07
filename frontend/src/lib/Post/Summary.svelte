@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Fa from 'svelte-fa/src/fa.svelte';
-	import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+	import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 	import Meta from './Meta.svelte';
 	import Tags from './Tags.svelte';
@@ -29,7 +29,9 @@
 	<footer>
 		<a href="/posts/{post.slug}">
 			Read more
-			<Fa icon={faArrowRight} />
+			<div class="btn-arrow" >
+				<Fa icon={faArrowRight} />
+			</div>
 		</a>
 	</footer>
 </article>
@@ -102,12 +104,20 @@
 	}
 
 	footer a {
+		background-color: var(--color-logo-secondary-bg);
 		text-transform: uppercase;
 		text-decoration: none;
-		color: var(--color-text-dark-decorator);
-		font-size: 0.875rem;
+		color: var(--color-text-light-primary);
+		font-size: 0.75rem;
 		font-weight: 400;
 		line-height: normal;
+		padding: 0.5rem 1rem;
+		border-radius: 1rem;
+	}
+
+	.btn-arrow {
+		display: inline-block;
+		transition: all 0.2s ease-in-out;
 	}
 
 	@media (max-width: 768px) {
@@ -135,7 +145,11 @@
 
 	@media (hover: hover) and (pointer: fine) {
 		footer a:hover {
-			color: var(--color-text-dark-headings);
+			background-color: var(--color-logo-secondary-bg-hover);
+		}
+
+		footer a:hover .btn-arrow {
+			transform: translateX(3px);
 		}
 	}
 </style>

@@ -24,6 +24,7 @@
 		--color-footer-bg: rgb(0, 27, 52);
 		--color-logo-primary-bg: rgb(0, 27, 52);
 		--color-logo-secondary-bg: rgb(224, 96, 36);
+		--color-logo-secondary-bg-hover: rgb(215, 83, 22);
 		--color-navbar-socials-bg: rgb(0, 27, 52);
 		--color-text-dark-headings: rgb(6, 22, 35);
 		--color-text-dark-primary: rgb(76, 78, 80);
