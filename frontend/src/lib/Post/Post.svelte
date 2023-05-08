@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Content from './Content.svelte';
+	// @ts-ignore
 	import Giscus from '@giscus/svelte';
 	import Tags from './Tags.svelte';
 	import DateInfo from './Meta.svelte';

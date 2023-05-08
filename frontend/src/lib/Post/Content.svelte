@@ -1,29 +1,5 @@
 <script lang="ts">
-	import { marked } from 'marked';
-	import hljs from 'highlight.js';
-
-	export let content: string;
-
-	marked.setOptions({
-		highlight: function (code, lang) {
-			const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-			return hljs.highlight(code, { language }).value;
-		},
-		langPrefix: 'hljs language-',
-		gfm: true,
-		breaks: true
-	});
-
-	marked.Renderer.prototype.paragraph = (text) => {
-		if (text.startsWith('<img')) {
-			return text + '\n';
-		}
-		return '<p>' + text + '</p>';
-	};
-
-	marked.Renderer.prototype.image = (text) => {
-		return `<img class="content-image" src="` + text + `"/>`;
-	};
+	export let content: any;
 </script>
 
 <svelte:head>
@@ -34,7 +10,7 @@
 </svelte:head>
 
 <section class="post-content">
-	{@html marked(content)}
+	{@html content}
 </section>
 
 <style>
