@@ -17,6 +17,6 @@
 	header {
 		max-width: 55rem;
 		margin: auto;
-		padding: 1.5rem 1.5rem;
+		padding: 0 1.5rem;
 	}
 </style>

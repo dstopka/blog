@@ -106,7 +106,7 @@
 	}
 
 	.logo a {
-		font-weight: 500;
+		font-weight: 700;
 		font-size: 1.4rem;
 		text-transform: uppercase;
 	}

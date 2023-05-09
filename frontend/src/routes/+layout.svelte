@@ -36,7 +36,7 @@
 	}
 
 	:global(body) {
-		font-family: 'Rubik', ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+		font-family: 'Roboto', ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif;
 		font-feature-settings: normal;
 		background-color: var(--color-bg-primary);
 		color: var(--color-text-dark-primary);

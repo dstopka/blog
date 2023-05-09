@@ -57,8 +57,8 @@
 
 	h1 {
 		color: var(--color-text-dark-headings);
-		font-size: 4rem;
-		font-weight: 500;
+		font-size: 3.5rem;
+		font-weight: 700;
 	}
 
 	.wrap-lg {
@@ -93,15 +93,14 @@
 	}
 
 	.tags {
-		padding: 2rem 0;
 		font-size: 1rem;
 	}
 
 	.content {
 		width: 100%;
 		text-align: justify;
-		font-size: 1.25rem;
-		line-height: 1.875rem;
+		font-size: 1.125rem;
+		line-height: 1.75rem;
 		-webkit-font-smoothing: antialiased;
 	}
 
@@ -112,7 +111,7 @@
 	@media (max-width: 768px) {
 		.content {
 			font-size: 1rem;
-			line-height: 1.75rem;
+			line-height: 1.5rem;
 		}
 
 		.meta {
