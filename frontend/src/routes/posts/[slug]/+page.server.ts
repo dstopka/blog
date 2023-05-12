@@ -1,11 +1,11 @@
-import { PUBLIC_POST_HOST } from '$env/static/public';
+import { PUBLIC_POST_ADDR } from '$env/static/public';
 import { compile } from 'mdsvex';
 import remarkBreaks from 'remark-breaks';
 
 /** @type {import('./$types').PageLoad} */
 
 export async function load({ fetch, params }: { fetch: any, params: any }) {
-    const resp = await fetch(`${PUBLIC_POST_HOST}/post?slug=${params.slug}`);
+    const resp = await fetch(`${PUBLIC_POST_ADDR}/post?slug=${params.slug}`);
     const postData = await resp.json()
 
     console.log(postData.content)

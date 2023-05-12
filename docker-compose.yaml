@@ -1,0 +1,23 @@
+version: '3.8'
+name: 'blog'
+services:
+  posts:
+    build:
+      context: docker
+    volumes:
+      - ./lambda:/lambda
+    working_dir: /lambda/cmd/posts
+    ports:
+      - "127.0.0.1:3010:$PORT"
+    env_file:
+      - .env
+  post:
+    build:
+      context: docker
+    volumes:
+      - ./lambda:/lambda
+    working_dir: /lambda/cmd/post
+    ports:
+      - "127.0.0.1:3001:$PORT"
+    env_file:
+      - .env
