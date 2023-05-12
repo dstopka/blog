@@ -69,6 +69,7 @@
 	}
 
 	/* Code */
+
 	:global(.post-content p code) {
 		font-family: 'Fira Mono', monospace;
 		color: var(--color-text-dark-decorator);
@@ -87,6 +88,13 @@
 		font-size: 0.875rem;
 		line-height: 1.5rem;
 		display: inline-block;
+	}
+
+	:global(code) {
+		text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+		-moz-text-size-adjust: 100%;
+		-webkit-text-size-adjust: 100%;
 	}
 
 	/* Quote */
