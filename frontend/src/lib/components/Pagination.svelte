@@ -2,7 +2,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-	const pageSize: number = 10;
+	const pageSize: number = 1;
 
 	export let allPosts: any[];
 	export let postsToDisplay: any[];
@@ -74,7 +74,7 @@
 
 	@media (hover: hover) and (pointer: fine) {
 		button:hover {
-			background-color: var(--color-logo-secondary-bg);
+			background-color: var(--color-pagination-bg-hover);
 		}
 	}
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../styles/prism-onedark.css'
-	import Footer from '$lib/Footer/Footer.svelte';
-	import Navbar from '$lib/Navbar/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
 <Navbar />
@@ -19,16 +19,19 @@
 
 	:root {
 		text-rendering: optimizeLegibility;
-		--color-bg-primary: rgb(249, 249, 249);
+		--color-bg-primary: rgb(252, 252, 252);
 		--color-bg-gray: rgb(228, 228, 228);
 		--color-pagination-bg: rgb(0, 27, 52);
+		--color-pagination-bg-hover: rgb(215, 83, 22);
 		--color-footer-bg: rgb(0, 27, 52);
 		--color-logo-primary-bg: rgb(0, 27, 52);
 		--color-logo-secondary-bg: rgb(224, 96, 36);
-		--color-logo-secondary-bg-hover: rgb(215, 83, 22);
+		--color-read-more-button-bg: rgb(224, 96, 36);
+		--color-read-more-button-bg-hover: rgb(215, 83, 22);
+		--color-socials-bg: rgb(224, 96, 36);
 		--color-navbar-socials-bg: rgb(0, 27, 52);
-		--color-text-dark-headings: rgb(6, 22, 35);
-		--color-text-dark-primary: rgb(76, 78, 80);
+		--color-text-dark-headings: rgb(3, 17, 29);
+		--color-text-dark-primary: rgb(64, 66, 68);
 		--color-text-dark-decorator: rgb(208, 96, 44);
 		--color-text-light-primary: rgb(247, 250, 254);
 		--color-text-light-secondary: rgb(98, 122, 148);

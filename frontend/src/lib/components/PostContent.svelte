@@ -12,16 +12,20 @@
 		margin-bottom: 1.5rem;
 	}
 
-	:global(.post-content :where(h1+*, h2+*, h3+*)) {
+	:global(.post-content :where(h1 + *, h2 + *, h3 + *)) {
 		margin-top: 0;
 	}
 
-	:global(.post-content p:has(+ul)) {
+	:global(.post-content p:has(+ ul)) {
 		margin-bottom: 0;
 	}
 
 	:global(.post-content > p:last-of-type) {
 		margin-bottom: 0;
+	}
+
+	:global(.post-content >:first-child) {
+		margin-top: 1rem;
 	}
 
 	/* Headings */
@@ -145,4 +149,9 @@
 		border: none;
 	}
 
+	@media (max-width: 768px) {
+		:global(.post-content :first-child) {
+			margin-top: 0.5rem;
+		}
+	}
 </style>

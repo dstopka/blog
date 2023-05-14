@@ -35,7 +35,11 @@ func (l QueryAllPostsLambda) ServeLambda(
 	}
 
 	posts := postsModelToResponse(postsModel)
-	return lambdaResponse(posts, http.StatusOK), nil
+	
+	resp := lambdaResponse(posts, http.StatusOK)
+	resp.Headers["Cache-Control"] = "public, max-age=300"
+
+	return resp, nil
 }
 
 // ServeHTTP is an entrypoint for serving an http endpoint.
@@ -47,6 +51,9 @@ func (l QueryAllPostsLambda) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	posts := postsModelToResponse(postsModel)
+
+	w.Header().Set("cache-control", "public, max-age=300")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	httpResponse(w, r, posts, http.StatusOK)
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Hamburger } from 'svelte-hamburgers';
-	import { navlinks } from './nav-links';
-	import Socials from '$lib/Socials/Socials.svelte';
+	import { navlinks } from '../nav-links';
+	import Socials from '$lib/components/Socials.svelte';
 
 	let open: boolean = false;
 	let y: number;
@@ -16,7 +16,12 @@
 	<section class="navbar-socials">
 		<div class="container row center">
 			<div class="socials-list margin-right-1">
-				<Socials color="var(--color-text-light-primary)" colorHover="var(--color-logo-secondary-bg)" inCircle={false} gap={'0.5rem'} />
+				<Socials
+					color="var(--color-text-light-primary)"
+					colorHover="var(--color-logo-secondary-bg)"
+					inCircle={false}
+					gap={'0.5rem'}
+				/>
 			</div>
 		</div>
 	</section>
@@ -29,7 +34,7 @@
 				</a>
 			</div>
 			<div class="menu-inline row margin-right-1">
-				{#each navlinks as link, i}
+				{#each navlinks as link}
 					<a class="link" href={link.href}>
 						{link.label}
 					</a>
@@ -41,10 +46,23 @@
 		</div>
 		<div class="dropdown column container" class:hidden={!open}>
 			{#each navlinks as link}
-				<a class="link" href={link.href}>{link.label}</a>
+				<a
+					class="link"
+					href={link.href}
+					on:click={() => {
+						open = false;
+					}}
+				>
+					{link.label}
+				</a>
 			{/each}
 			<div class="socials-list">
-				<Socials color="var(--color-text-dark-primary)" colorHover="var(--color-text-dark-headings)" inCircle={false} gap={'0.5rem'} />
+				<Socials
+					color="var(--color-text-dark-primary)"
+					colorHover="var(--color-text-dark-headings)"
+					inCircle={false}
+					gap={'0.5rem'}
+				/>
 			</div>
 		</div>
 	</header>
@@ -120,7 +138,7 @@
 		transform: translateZ(-10px);
 		background-color: var(--color-logo-secondary-bg);
 	}
-	
+
 	.logo-foreground {
 		background-color: var(--color-logo-primary-bg);
 		color: var(--color-text-light-primary);
