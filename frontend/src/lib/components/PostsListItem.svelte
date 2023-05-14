@@ -115,7 +115,7 @@
 	}
 
 	footer a {
-		background-color: var(--color-logo-secondary-bg);
+		background-color: var(--color-read-more-button-bg);
 		text-transform: uppercase;
 		text-decoration: none;
 		color: var(--color-text-light-primary);
@@ -159,7 +159,7 @@
 
 	@media (hover: hover) and (pointer: fine) {
 		footer a:hover {
-			background-color: var(--color-logo-secondary-bg-hover);
+			background-color: var(--color-read-more-button-bg-hover);
 		}
 
 		footer a:hover .btn-arrow {
