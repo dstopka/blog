@@ -10,11 +10,11 @@
 
 <article class="entry">
 	<header>
-		<h2>
+		<h1>
 			<a href="/posts/{post.slug}">
 				{post.title}
 			</a>
-		</h2>
+		</h1>
 		<div class="subheader">
 			<Meta publishedTime={post.publishedTime} updatedTime={post.updatedTime} />
 			{#if post.tags}
@@ -24,12 +24,14 @@
 	</header>
 	<section class="entry-body">
 		<p class="entry-summary">{post.description}</p>
-		<img class="entry-cover" src={post.coverImageURL} alt="" />
+		<a class="entry-cover" href="/posts/{post.slug}">
+			<img src={post.coverImageURL} alt="" />
+		</a>
 	</section>
 	<footer>
 		<a href="/posts/{post.slug}">
 			Read more
-			<div class="btn-arrow" >
+			<div class="btn-arrow">
 				<Fa icon={faArrowRight} />
 			</div>
 		</a>
@@ -47,6 +49,11 @@
 		padding-top: 0;
 	}
 
+	.entry:first-child header {
+		margin: 0;
+		padding-top: 0;
+	}
+
 	header {
 		margin: 0.5rem 0;
 		padding-top: 1rem;
@@ -57,7 +64,7 @@
 		color: inherit;
 	}
 
-	h2 {
+	h1 {
 		font-size: 2rem;
 		line-height: normal;
 		color: var(--color-text-dark-headings);
@@ -80,23 +87,27 @@
 		margin: auto;
 		margin: 0.5rem 0;
 		align-items: center;
+		gap: 1rem;
 	}
 
 	.entry-summary {
-		margin: 0.5rem 0;
 		flex-grow: 1;
-		font-size: 1.125rem;
+		font-size: 1rem;
 		-webkit-font-smoothing: antialiased;
-		line-height: 1.75rem;
+		line-height: 1.5rem;
+		flex: 1 1 0px;
 	}
 
 	.entry-cover {
-		margin-left: 1rem;
 		margin-bottom: auto;
-		margin-top: 0.5rem;
+		flex: 1 1 0px;
+		max-width: 40%;
+	}
+
+	.entry-cover img {
 		object-fit: cover;
-		width: 50%;
-		border-radius: 1rem;
+		width: 100%;
+		border-radius: 0.5rem;
 	}
 
 	footer {
@@ -121,25 +132,28 @@
 	}
 
 	@media (max-width: 768px) {
-		.subheader {
-			flex-direction: column;
-			align-items: start;
+		h1 {
+			font-size: 1.5rem;
 		}
 
 		.entry-body {
 			display: flex;
 			flex-direction: column-reverse;
-			margin: auto;
-		}
-
-		.entry-body img.entry-cover {
-			width: 100%;
-			aspect-ratio: initial;
+			gap: 0.5rem;
+			margin-top: 1rem;
 		}
 
 		.entry-body .entry-cover {
-			margin: 1rem 0 0.5rem 0;
+			width: 100%;
+		}
+
+		.entry-cover {
+			max-width: 100%;
 			padding: 0;
+		}
+
+		.entry-cover img {
+			aspect-ratio: initial;
 		}
 	}
 

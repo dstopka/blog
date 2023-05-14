@@ -15,10 +15,10 @@
 
 <style>
 	.posts-list {
-		margin: auto;
 		max-width: 52rem;
 		flex-direction: column;
 		display: flex;
 		padding: 0 1.5rem;
+		margin: 1rem auto 0 auto;
 	}
 </style>

@@ -9,14 +9,21 @@
 </script>
 
 <header>
-	<HeaderLine header="All Posts" size="3rem" />
+	<HeaderLine header="All Posts" />
 </header>
 <PostsList {posts} />
 
 <style>
 	header {
+		font-size: 2.5rem;
 		max-width: 55rem;
-		margin: auto;
+		margin: 1rem auto;
 		padding: 0 1.5rem;
+	}
+
+	@media (max-width: 768px) {
+		header {
+			font-size: 2rem;
+		}
 	}
 </style>
