@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Content from './Content.svelte';
+	import Content from './PostContent.svelte';
 	// @ts-ignore
 	import Giscus from '@giscus/svelte';
 	import Tags from './Tags.svelte';
-	import DateInfo from './Meta.svelte';
+	import DateInfo from './PostMeta.svelte';
 	import HeaderLine from '$lib/components/HeaderLine.svelte';
 
 	export let post: any;

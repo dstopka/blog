@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Pagination from '$lib/components/Pagination.svelte';
-	import Summary from '$lib/components/Summary.svelte';
+	import Summary from '$lib/components/PostsListItem.svelte';
 
 	export let posts: any[];
 	let postsToDisplay: any[] = [];

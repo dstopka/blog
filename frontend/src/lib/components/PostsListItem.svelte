@@ -2,7 +2,7 @@
 	import Fa from 'svelte-fa';
 	import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-	import Meta from './Meta.svelte';
+	import Meta from './PostMeta.svelte';
 	import Tags from './Tags.svelte';
 
 	export let post: any;
