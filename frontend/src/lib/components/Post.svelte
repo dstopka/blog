@@ -29,7 +29,9 @@
 	<footer>
 		<div class="wrap-lg">
 			<section class="tags">
-				<HeaderLine header="Tags" size="1.75rem" />
+				<div class="tags-header">
+					<HeaderLine header="Tags" />
+				</div>
 				<Tags tags={post.tags} />
 			</section>
 			<section class="post-comments">
@@ -93,7 +95,12 @@
 	}
 
 	.tags {
-		font-size: 1rem;
+		margin: 1rem 0 0 0;
+	}
+
+	.tags-header {
+		font-size: 1.75rem;
+		margin: 1rem 0;
 	}
 
 	.content {
@@ -119,7 +126,7 @@
 		}
 
 		h1 {
-			font-size: 2.75rem;
+			font-size: 2.5rem;
 		}
 	}
 </style>
