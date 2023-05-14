@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../styles/prism-onedark.css'
-	import Footer from '$lib/Footer/Footer.svelte';
-	import Navbar from '$lib/Navbar/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
 <Navbar />

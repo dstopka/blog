@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Hamburger } from 'svelte-hamburgers';
-	import { navlinks } from './nav-links';
-	import Socials from '$lib/Socials/Socials.svelte';
+	import { navlinks } from '../nav-links';
+	import Socials from '$lib/components/Socials.svelte';
 
 	let open: boolean = false;
 	let y: number;

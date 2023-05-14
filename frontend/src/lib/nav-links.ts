@@ -3,7 +3,7 @@ type NavLink = {
     label: string
 }
 
-export let navlinks: NavLink[] = [
+export const navlinks: NavLink[] = [
     {
         href: "/",
         label: "All Posts",

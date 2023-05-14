@@ -1,5 +1,5 @@
 <script>
-	import Socials from '$lib/Socials/Socials.svelte';
+	import Socials from '$lib/components/Socials.svelte';
 </script>
 
 <footer class="page-footer">

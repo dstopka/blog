@@ -4,7 +4,7 @@
 	import Giscus from '@giscus/svelte';
 	import Tags from './Tags.svelte';
 	import DateInfo from './Meta.svelte';
-	import HeaderLine from '$lib/HeaderLine/HeaderLine.svelte';
+	import HeaderLine from '$lib/components/HeaderLine.svelte';
 
 	export let post: any;
 </script>

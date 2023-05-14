@@ -1,6 +1,6 @@
 <script lang="ts">
-	import HeaderLine from '$lib/HeaderLine/HeaderLine.svelte';
-	import PostsList from '$lib/Post/List.svelte';
+	import HeaderLine from '$lib/components/HeaderLine.svelte';
+	import PostsList from '$lib/components/List.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data: any;
