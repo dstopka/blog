@@ -2,61 +2,47 @@
 	import Socials from '$lib/components/Socials.svelte';
 </script>
 
-<footer class="page-footer">
-	<section class="footer-main">
-		<div class="container row">
-			<div class="socials-list">
-				<Socials color={'var(--color-text-light-primary)'} colorHover={'var(--color-text-light-primary)'} inCircle={true} gap={'1rem'} />
-			</div>
+<footer>
+	<div class="container">
+		<div class="footer-legal-content">
+			<span> &copy; Copyright 2023 Dariusz Stopka </span>
 		</div>
-	</section>
-	<section class="footer-legal">
-		<div class="container row">
-			<div class="footer-legal-content">
-				<span> &copy; Copyright 2023 Dariusz Stopka </span>
-			</div>
+		<div class="socials-list">
+			<Socials
+				color={'var(--color-text-light-primary)'}
+				colorHover={'var(--color-text-light-primary)'}
+				inCircle={true}
+				gap={'1rem'}
+			/>
 		</div>
-	</section>
+	</div>
 </footer>
 
 <style>
-	.page-footer {
+	footer {
 		margin-top: auto;
 		background-color: var(--color-footer-bg);
 	}
-
+	
 	.container {
-		max-width: 70rem;
-		padding: 0 1rem;
-		margin: auto;
-	}
-
-	.row {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		height: 100%;
-	}
-
-	.footer-main {
-		font-size: 1.25rem;
+		max-width: 70rem;
 		padding: 0 1rem;
-		width: 100%;
+		margin: auto;
 	}
 
 	.socials-list {
 		margin-left: auto;
 		padding: 1rem 0;
 		height: 100%;
+		font-size: 1.25rem;
 	}
-
-	.footer-legal {
-		padding-bottom: 1rem;
+	
+	.footer-legal-content {
 		font-size: 0.75rem;
 		color: var(--color-text-light-secondary);
-	}
-
-	.footer-legal-content {
 		margin-right: auto;
 	}
 
